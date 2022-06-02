@@ -1,7 +1,7 @@
 #!/bin/bash
 
 while true; do
-    read -p "Do you wish to run the script for SeolVim Frontend? [y/n]: " yn
+    read -p "Do you wish to run the script for OneLink_CAU Frontend? [y/n]: " yn
     case $yn in
         [Yy]* ) npm install;
 #               yarn start; break;;		  # Original Ubuntu
@@ -11,4 +11,4 @@ while true; do
     esac
 done
 
-echo "Starting SeolVim Frontend"
+echo "Starting OneLink_CAU Frontend"

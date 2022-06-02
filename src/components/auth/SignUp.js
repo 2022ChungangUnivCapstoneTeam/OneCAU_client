@@ -12,6 +12,64 @@ import storage from '../../lib/storage'
 import * as userActions from '../../redux/user'
 
 
+import styled from "styled-components";
+
+let Container = styled.div`
+  background: #89B2E9;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+`
+
+let Containers = styled.div`
+  width:582px;
+  backdrop-filter: blur(35px);
+  background-color: rgba(255, 255, 255, 0.8);
+  position: absolute;
+  height: 100%;
+  left: 429px;
+
+ display: flex;
+  position: absolute;
+  flex-direction: column;
+  justify-content: space-evenly;
+  top:0px;
+  align-items: center;
+  padding: 0 2rem;
+  @media (max-width: 900px) {
+    width: 100vw;
+    position: absolute;
+    padding: 0;
+  }
+  h4 {
+    color: #808080;
+    font-weight: bold;
+    font-size: 13px;
+    margin-top: 2rem;
+    span {
+      color: #ff8d8d;
+      cursor: pointer;
+    }
+  }
+`;
+
+let LogoWrapper = styled.div`
+  img {
+    height: 6rem;
+  }
+  h3 {
+    color: #4B54DC;
+    text-align: center;
+    font-size: 22px;
+  }
+  span {
+    color:#4B54DC;
+    font-weight: 300;
+    font-size: 18px;
+  }
+`;
 
 class SignUp extends Component {
 
@@ -114,36 +172,43 @@ class SignUp extends Component {
         const { handleChange } = this;
 
         return (
-            <AuthContent title="Sign Up">
-                <InputLabel
-                    label="이메일"
-                    name="email"
-                    placeholder="이메일"
-                    value={email}
-                    onChange={handleChange}
-                />
-                <InputLabel
-                    label="비밀번호"
-                    name="password"
-                    placeholder="비밀번호"
-                    type="password"
-                    value={password}
-                    onChange={handleChange}
-                />
-                <InputLabel
-                    label="비밀번호 확인"
-                    name="passwordConfirm"
-                    placeholder="비밀번호 확인"
-                    type="password"
-                    value={passwordConfirm}
-                    onChange={handleChange}
-                />
-                {
-                    error && <AuthError>{error}</AuthError>
-                }
-                <AuthButton onClick = {this.handleBackSignUp}>Sign Up</AuthButton>
-                <RightAlignedLink to1 = "/" to2="/auth/signin">Sign In</RightAlignedLink>
-            </AuthContent>
+            <Container>
+                <Containers>
+                    <LogoWrapper>
+                    <h3> One <span>CAU</span></h3>
+                    </LogoWrapper>
+                <AuthContent title="Sign Up">
+                    <InputLabel
+                        label="이메일"
+                        name="email"
+                        placeholder="이메일"
+                        value={email}
+                        onChange={handleChange}
+                    />
+                    <InputLabel
+                        label="비밀번호"
+                        name="password"
+                        placeholder="비밀번호"
+                        type="password"
+                        value={password}
+                        onChange={handleChange}
+                    />
+                    <InputLabel
+                        label="비밀번호 확인"
+                        name="passwordConfirm"
+                        placeholder="비밀번호 확인"
+                        type="password"
+                        value={passwordConfirm}
+                        onChange={handleChange}
+                    />
+                    {
+                        error && <AuthError>{error}</AuthError>
+                    }
+                    <AuthButton onClick = {this.handleBackSignUp}>Sign Up</AuthButton>
+                    <RightAlignedLink to1 = "/" to2="/auth/signin">Sign In</RightAlignedLink>
+                </AuthContent>
+                </Containers>
+            </Container>
         );
     }
 }

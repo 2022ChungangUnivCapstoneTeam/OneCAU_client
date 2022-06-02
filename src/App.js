@@ -11,6 +11,8 @@ import { bindActionCreators } from 'redux';
 import { render } from '@testing-library/react';
 
 import VimEditor from './components/editor/VimEditor.js';
+import LinkTree from './components/multi_link/LinkTree';
+
 
 class App extends Component {
   constructor(props) {
@@ -43,10 +45,11 @@ class App extends Component {
         <Router>
           {/* <NaviContainer/> */}
           <Route exact path = "/">
-            <VimEditor
+            {/* <VimEditor
               xml={this.state.xml}
               onXmlChange={xml => this.setState({ xml })}
-            />
+            /> */}
+            <LinkTree />
           </Route>
           <Route path = "/auth" component = {Auth}></Route>
         </Router>
