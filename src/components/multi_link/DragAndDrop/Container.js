@@ -6,7 +6,8 @@ const style = {
   width: 320,
 }
 
-export const Container = () => {
+//cardcontainer :: card list 라고 보면 될듯
+export const Container = (props) => {
   const [cards, setCards] = useState([
     {
       id: 1,
@@ -25,27 +26,23 @@ export const Container = () => {
     },
   ])
 
+  const [newCardType, setNewCardType] = useState("")
+
   const [inputs, setInputs] = useState({
     id: '',
     card_type: '',
     card_header: '',
   })
 
-  // const onChange = e => {
-  //   const { name, value } = e.target;
-  //   setInputs({
-  //     ...inputs,
-  //     [id]: value
-  //   });
-  // };
-
   const nextId = useRef(4);
   const onCreate = () => {
     const newCard = {
       id: nextId.current,
       card_header: "",
-      card_type: "",
+      card_type: props.card_type,
     };
+
+    console.log("new card type: ", newCard.card_type);
 
     setCards([...cards, newCard]);
 
@@ -56,10 +53,12 @@ export const Container = () => {
     nextId.current += 1;
   }
 
+
   const moveCard = useCallback((dragIndex, hoverIndex) => {
     // console.log("HOHOHo!!")
     // console.log(cards.find(elem => elem.card_type == 'profile'))
     // if(cards.indexOf() == 'profile'){
+
     setCards((prevCards) =>
     update(prevCards, {
       $splice: [
@@ -81,6 +80,7 @@ export const Container = () => {
         card_header={card.card_header}
         movable={card.movable}
         moveCard={moveCard}
+        onCreate={onCreate}
       />
     )
   }, [])

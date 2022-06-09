@@ -58,8 +58,9 @@ const AntdCollapseWrapper = styled.div`
 //   cursor: 'move',
 // }
 
-export const Card = ({ card_header, card_type, id, index, moveCard }) => {
+export const Card = ({ card_header, card_type, id, index, moveCard, onCreate}) => {
   // card type에 따라서 보여지는 카드의 형태가 달라지도록 만들어야 함
+  // onCreate는 윗 component에서 받아온 onCreate함수, 새로운 카드가 생성될 때 사용.
   const ref = useRef(null)
 
   const [{ handlerId }, drop] = useDrop({
@@ -124,23 +125,10 @@ export const Card = ({ card_header, card_type, id, index, moveCard }) => {
 
   drag(drop(ref))
 
-  // const [{ card_type }] = () => {
-  //   card_type: monitor.getCardType(),
-  // }
-
-
   const onChange = (key) => {
     console.log(key);
   };
 
-  // const genExtra = () => {
-  //   <HolderOutlined
-  //     onClick={(event) => {
-  //       event.stopPropagation();
-  //     }}
-  //   />
-  // };
-  // const [expandIconPosition, setExpandIconPosition] = useState('left');
 
   if(card_type == 'text') {
     return (
@@ -154,13 +142,14 @@ export const Card = ({ card_header, card_type, id, index, moveCard }) => {
                   className="site-collapse-custom-collapse"
                   >
                   <Panel header={card_header} key={handlerId} className="site-collapse-custom-panel">
-
+                  <text>타이틀 텍스트</text>
                   <Input
                       placeholder="주제 문구 입력"
                       allowClear
                       onChange={onChange} />
                   <br />
                   <br />
+                  <text>본문 텍스트</text>
                   <TextArea
                       placeholder="설명 문구 입력"
                       allowClear
@@ -192,18 +181,18 @@ export const Card = ({ card_header, card_type, id, index, moveCard }) => {
                   >
                   <Panel header={card_header} key={handlerId} className="site-collapse-custom-panel">
 
+                  <text>타이틀 텍스트</text>
                   <Input
-                      placeholder="주제 문구 입력"
+                      placeholder="버튼위에 보여질 텍스트"
                       allowClear
                       onChange={onChange} />
                   <br />
                   <br />
+                  <text>연결될 링크 주소</text>
                   <TextArea
-                      placeholder="설명 문구 입력"
+                      placeholder="https://"
                       allowClear
                       onChange={onChange} />
-
-                  {/* <p>{text}</p> */}
 
                   </Panel>
               </Collapse>

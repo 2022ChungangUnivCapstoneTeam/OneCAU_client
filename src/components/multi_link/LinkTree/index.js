@@ -50,6 +50,12 @@ const AntdModalWrapper = styled.div`
 export default function LinkTree() {
   // const [image, setImage] = useState('');
   const [container, setContainer] = useState(null);
+  const [newCardType, setNewCardType] = useState("");
+
+  const getNewCardType = (text) => {
+    setNewCardType(text);
+    // console.log(text);
+  }
 
   // React Hook
   const App__ = () => {
@@ -84,11 +90,12 @@ export default function LinkTree() {
               <Header title='Multi_Link_page_build' subtitle='CAU multilink page builder' />
               <Profile/>
               <DndProvider backend={HTML5Backend}>
+                {/* this is Container */}
                 <Draggable_cards />
               </DndProvider>
 
               {/* Block Modal */}
-              <ModalView/>
+              <ModalView getNewCardType={getNewCardType}/>
             </Container__>
           </Col>
         </Row>

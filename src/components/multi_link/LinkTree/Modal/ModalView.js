@@ -8,6 +8,8 @@ import { SearchOutlined, LinkOutlined, FontSizeOutlined, PictureOutlined } from 
 
 import styled from 'styled-components';
 import onClickHandler from './ModalOnClick';
+import { propTypes } from 'react-bootstrap/esm/Image';
+
 
 const AntdModalWrapper = styled.div`
   // @import '~antd/dist/antd.css';
@@ -22,10 +24,10 @@ const AntdModalWrapper = styled.div`
 `;
 
 // Modal component
-function ModalView() {
+// function ModalView() {
+const ModalView = (props) => {
     const [loading, setLoading] = useState(false);
     const [visible, setVisible] = useState(false);
-    const [blockType, setBlockType] = useState("");
 
     const showModal = () => {
         setVisible(true);
@@ -43,11 +45,19 @@ function ModalView() {
         setVisible(false);
     };
 
+    const sendBlockType = (text) => {
+        props.getNewCardType(text);
+    }
+
     const onClickHandler = (blockTypeName) => {
         // const blockType = +e.target.dataset.blockType;
-        console.log(blockTypeName);
-        setBlockType(blockTypeName);
+        // setBlockType(blockTypeName);
+        // console.log(blockTypeName);
+
+        // console.log("blockType: ", blockType);
         // 클릭되면 블록(Card)이 생성되도록.
+        // 하위 컴포넌트에서 상위 컴포넌트로 값을 넘겨주기 위해서는 props를 사용할 수 없음 (props는 상위->하위)
+        sendBlockType(blockTypeName);
     }
 
     return (
@@ -87,9 +97,10 @@ function ModalView() {
             </Tooltip> */}
             {/* icons can be found in here
                 https://ant.design/components/icon/*/}
-            <Antd_button icon={<LinkOutlined />} block onClick={() => onClickHandler("link")}>링크</Antd_button>
-            <Antd_button icon={<FontSizeOutlined />} block onClick={() => onClickHandler("text")}>텍스트</Antd_button>
-            <Antd_button icon={<PictureOutlined />} block onClick={() => onClickHandler("picture")}>사진</Antd_button>
+            {/* <Antd_button icon={<LinkOutlined />} block onClick={() => onClickHandler("link")}>링크</Antd_button> */}
+            <Antd_button icon={<LinkOutlined />} block onClick={() => sendBlockType("link")}>링크</Antd_button>
+            <Antd_button icon={<FontSizeOutlined />} block onClick={() => sendBlockType("text")}>텍스트</Antd_button>
+            <Antd_button icon={<PictureOutlined />} block onClick={() => sendBlockType("picture")}>사진</Antd_button>
             {/* <h1>{blockType}</h1> */}
             </>
         </Modal>
