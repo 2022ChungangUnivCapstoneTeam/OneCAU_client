@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Container } from './styles';
+import { Container__ } from './styles';
 import Button from '../Button';
 import variables from '../variables';
 import Header from '../Header';
@@ -20,8 +20,10 @@ import Draggable_cards from '../DragAndDrop/exportDnD';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import styled from 'styled-components';
-import modalOnClick from './Blocks/ModalOnClick';
+// import modalOnClick from './Blocks/ModalOnClick';
 import ModalView from './Modal/ModalView';
+import Profile from './Profile';
+import { Row, Col, Container } from 'react-bootstrap';
 
 // const facebookLogo = require('../../images/facebook.svg');
 // const githubLogo = require('../../images/github.svg');
@@ -46,8 +48,8 @@ const AntdModalWrapper = styled.div`
 
 // export default function LinkTree(props) {
 export default function LinkTree() {
-  const
-    [image, setImage] = useState('');
+  // const [image, setImage] = useState('');
+  const [container, setContainer] = useState(null);
 
   // React Hook
   const App__ = () => {
@@ -57,7 +59,7 @@ export default function LinkTree() {
       setDate(value);
     };
     return (
-      <div style={{ width: 400, margin: '100px auto' }}>
+      <div style={{ width: 400, margin: '200px auto' }}>
         <DatePicker onChange={handleChange} />
         <div style={{ marginTop: 16 }}>
           {/* Selected Date: {date ? date.format('YYYY-MM-DD') : 'None'} */}
@@ -69,46 +71,28 @@ export default function LinkTree() {
 
   return (
     <div className="LinkTree">
-    <SplitPane
-      split="vertical"
-      minSize={50}
-      // defaultSize={100}
-      defaultSize={parseInt(localStorage.getItem('splitPos'), 10)}
-      onChange={(size) => localStorage.setItem('splitPos', size)}
-    >
-    <Pane>
-      <Container>
-        {/* <App__/> */}
-        {/* <div className='App'>
-          <div style={{ width: 400, margin: '100px auto' }}>
-          <h1>antd version: {version}</h1>
-          <DatePicker />
-          <Antd_button type="primary" style={{ marginLeft: 8 }}>
-            Primary Button
-          </Antd_button>
-          </div>
-        </div> */}
+      <Container fluid>
+        <Row>
+          <Col md={4} className="item">
+            {/* <Container__> */}
+              <App__/>
+            {/* </Container__> */}
+          </Col>
+
+          <Col md={4} className="item">
+            <Container__>
+              <Header title='Multi_Link_page_build' subtitle='CAU multilink page builder' />
+              <Profile/>
+              <DndProvider backend={HTML5Backend}>
+                <Draggable_cards />
+              </DndProvider>
+
+              {/* Block Modal */}
+              <ModalView/>
+            </Container__>
+          </Col>
+        </Row>
       </Container>
-    </Pane>
-    <Pane>
-      <Container>
-        <Header picture='https://scontent.fgvr2-1.fna.fbcdn.net/v/t31.0-8/p960x960/13710496_10209793534625506_2997078028056513758_o.jpg?_nc_cat=107&_nc_sid=7aed08&_nc_ohc=CT0MJiwW7cYAX-DuiSm&_nc_ht=scontent.fgvr2-1.fna&_nc_tp=6&oh=f10204fc396130e703c690b8be97f3c2&oe=5E94D2C2' title='Multi_Link_page_build' subtitle='CAU multilink page builder' />
-        <Button link='https://www.facebook.com/danielgomesp' name='Facebook' backgroundColor={variables.facebookColor} />
-        {/* <Button link='https://www.instagram.com/danielgomesp/' name='Instagram' backgroundColor={variables.instagramColor} />
-        <Button link='https://www.youtube.com/channel/UCrVYzSKkbkJuCtXFIPAc1LA?view_as=subscriber' name='Youtube' backgroundColor={variables.youtubeColor} />
-        <Button link='https://github.com/Danielgomesp' name='Github' backgroundColor={variables.githubColor} />
-        <Button link='https://wa.me/5533999640132' name='Whatsapp' backgroundColor={variables.whatsappColor} />
-        <Button link='https://github.com/Danielgomesp' name='Site Oficial' backgroundColor={variables.opt2Color} />
-        <Button link='https://www.linkedin.com/in/danielgomesp/'  name='LinkedIn' backgroundColor={variables.linkedinColor} />
-        <Button link='https://twitter.com/danielgoper' name='Twitter' backgroundColor={variables.twitterColor} /> */}
-        <DndProvider backend={HTML5Backend}>
-					<Draggable_cards />
-				</DndProvider>
-        {/* Block Modal */}
-        <ModalView/>
-      </Container>
-    </Pane>
-   </SplitPane>
-   </div>
+    </div>
   )
 }

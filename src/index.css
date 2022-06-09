@@ -6,6 +6,10 @@ body {
   font-family: sans-serif;
   box-sizing: border-box;
   background: #f1f1f5;
+  overflow: scroll;
+  overflow-y: scroll;
+  overflow-x: scroll;
+  position: relative;
 }
 
 *,

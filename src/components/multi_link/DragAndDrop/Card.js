@@ -9,6 +9,7 @@ import { Button as Antd_button} from "antd";
 import { HolderOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
 
+
 const { Panel } = Collapse;
 const { TextArea } = Input;
 
@@ -22,11 +23,12 @@ const AntdCollapseWrapper = styled.div`
   @import '~antd/dist/antd.css';
   [data-theme='compact'] .site-collapse-custom-collapse .site-collapse-custom-panel,
   .site-collapse-custom-collapse .site-collapse-custom-panel {
-    margin-bottom: 24px;
+    margin-bottom: 4px;
     overflow: hidden;
     background: #f7f7f7;
-    border: 0px;
+    border: 1px solid gray;
     border-radius: 2px;
+    background-color: #ccc;
   }
   [data-theme="dark"] .site-collapse-custom-collapse .site-collapse-custom-panel {
     background: rgba(255,255,255,0.04);
@@ -56,8 +58,8 @@ const AntdCollapseWrapper = styled.div`
 //   cursor: 'move',
 // }
 
-export const Card = ({ card_type, id, text, index, moveCard }) => {
-    // card type에 따라서 보여지는 카드의 형태가 달라지도록 만들어야 함
+export const Card = ({ card_header, card_type, id, index, moveCard }) => {
+  // card type에 따라서 보여지는 카드의 형태가 달라지도록 만들어야 함
   const ref = useRef(null)
 
   const [{ handlerId }, drop] = useDrop({
@@ -73,6 +75,7 @@ export const Card = ({ card_type, id, text, index, moveCard }) => {
       }
       const dragIndex = item.index
       const hoverIndex = index
+
       // Don't replace items with themselves
       if (dragIndex === hoverIndex) {
         return
@@ -139,42 +142,114 @@ export const Card = ({ card_type, id, text, index, moveCard }) => {
   // };
   // const [expandIconPosition, setExpandIconPosition] = useState('left');
 
-  return (
-    <>
-        <div ref={ref} data-handler-id={handlerId}>
-          <AntdCollapseWrapper>
-            <Collapse
-                // bordered={false}
-                defaultActiveKey={['0']}
-                onChange={onChange}
-                expandIconPosition={["right"]}
-                // expandIconPosition={expandIconPosition}
-                // expandIcon={({ isActive }) => isActive ? <HolderOutlined /> : <HolderOutlined />}
-                className="site-collapse-custom-collapse"
-                >
-                <Panel header={card_type} key={handlerId} className="site-collapse-custom-panel">
+  if(card_type == 'text') {
+    return (
+      <>
+          <div ref={ref} data-handler-id={handlerId}>
+            <AntdCollapseWrapper>
+              <Collapse
+                  defaultActiveKey={['0']}
+                  onChange={onChange}
+                  expandIconPosition={["right"]}
+                  className="site-collapse-custom-collapse"
+                  >
+                  <Panel header={card_header} key={handlerId} className="site-collapse-custom-panel">
 
-                <Input
-                    placeholder="주제 문구 입력"
-                    allowClear
-                    onChange={onChange} />
-                <br />
-                <br />
-                <TextArea
-                    placeholder="설명 문구 입력"
-                    allowClear
-                    onChange={onChange} />
+                  <Input
+                      placeholder="주제 문구 입력"
+                      allowClear
+                      onChange={onChange} />
+                  <br />
+                  <br />
+                  <TextArea
+                      placeholder="설명 문구 입력"
+                      allowClear
+                      onChange={onChange} />
 
-                {/* <p>{text}</p> */}
+                  {/* <p>{text}</p> */}
 
-                </Panel>
-            </Collapse>
-            </AntdCollapseWrapper>
-        </div>
-        {/* <div ref={ref} style={{ ...card_style, opacity }} data-handler-id={handlerId}>
-            {text}
-        </div> */}
-    </>
-  )
+                  </Panel>
+              </Collapse>
+              </AntdCollapseWrapper>
+          </div>
+          {/* <div ref={ref} style={{ ...card_style, opacity }} data-handler-id={handlerId}>
+              {text}
+          </div> */}
+      </>
+    )
+  }
 
+  if(card_type == 'link') {
+    return (
+      <>
+          <div ref={ref} data-handler-id={handlerId}>
+            <AntdCollapseWrapper>
+              <Collapse
+                  defaultActiveKey={['0']}
+                  onChange={onChange}
+                  expandIconPosition={["right"]}
+                  className="site-collapse-custom-collapse"
+                  >
+                  <Panel header={card_header} key={handlerId} className="site-collapse-custom-panel">
+
+                  <Input
+                      placeholder="주제 문구 입력"
+                      allowClear
+                      onChange={onChange} />
+                  <br />
+                  <br />
+                  <TextArea
+                      placeholder="설명 문구 입력"
+                      allowClear
+                      onChange={onChange} />
+
+                  {/* <p>{text}</p> */}
+
+                  </Panel>
+              </Collapse>
+              </AntdCollapseWrapper>
+          </div>
+          {/* <div ref={ref} style={{ ...card_style, opacity }} data-handler-id={handlerId}>
+              {text}
+          </div> */}
+      </>
+    )
+  }
+
+  if(card_type == 'picture') {
+    return (
+      <>
+          <div ref={ref} data-handler-id={handlerId}>
+            <AntdCollapseWrapper>
+              <Collapse
+                  defaultActiveKey={['0']}
+                  onChange={onChange}
+                  expandIconPosition={["right"]}
+                  className="site-collapse-custom-collapse"
+                  >
+                  <Panel header={card_header} key={handlerId} className="site-collapse-custom-panel">
+
+                  <Input
+                      placeholder="주제 문구 입력"
+                      allowClear
+                      onChange={onChange} />
+                  <br />
+                  <br />
+                  <TextArea
+                      placeholder="설명 문구 입력"
+                      allowClear
+                      onChange={onChange} />
+
+                  {/* <p>{text}</p> */}
+
+                  </Panel>
+              </Collapse>
+              </AntdCollapseWrapper>
+          </div>
+          {/* <div ref={ref} style={{ ...card_style, opacity }} data-handler-id={handlerId}>
+              {text}
+          </div> */}
+      </>
+    )
+  }
 }

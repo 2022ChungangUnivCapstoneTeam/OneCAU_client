@@ -12,7 +12,14 @@ import { render } from '@testing-library/react';
 
 import VimEditor from './components/editor/VimEditor.js';
 import LinkTree from './components/multi_link/LinkTree';
+import styled from 'styled-components';
 
+const Container = styled.div`
+  overflow: scroll;
+  width: 2000px;
+  height: 2000px;
+  // position: relative;
+`;
 
 class App extends Component {
   constructor(props) {
@@ -41,6 +48,8 @@ class App extends Component {
 
   render() {
     return (
+      // <div class="mostly-customized-scrollbar">
+      <Container>
       <Provider store={this.props.store}>
         <Router>
           {/* <NaviContainer/> */}
@@ -49,11 +58,13 @@ class App extends Component {
               xml={this.state.xml}
               onXmlChange={xml => this.setState({ xml })}
             /> */}
-            <LinkTree />
+              <LinkTree />
           </Route>
           <Route path = "/auth" component = {Auth}></Route>
         </Router>
       </Provider>
+      {/* // </div> */}
+      </Container>
     )
    }
 }

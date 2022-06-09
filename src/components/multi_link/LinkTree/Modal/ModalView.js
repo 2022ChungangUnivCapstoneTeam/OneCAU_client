@@ -7,16 +7,17 @@ import { Button as Antd_button} from "antd";
 import { SearchOutlined, LinkOutlined, FontSizeOutlined, PictureOutlined } from '@ant-design/icons';
 
 import styled from 'styled-components';
-import modalOnClick from '../Blocks/ModalOnClick';
+import onClickHandler from './ModalOnClick';
 
 const AntdModalWrapper = styled.div`
   // @import '~antd/dist/antd.css';
   .ant-btn-dashed {
     // margin-bottom: 24px;
-    // background-color: #f7f7f7;
-    // background-color: red;
+    background-color: #f7f7f7;
+    // background-color: #B8DFF8;
     // border: 0px;
     // border-radius: 2px;
+    width: 320px;
   }
 `;
 
@@ -24,6 +25,7 @@ const AntdModalWrapper = styled.div`
 function ModalView() {
     const [loading, setLoading] = useState(false);
     const [visible, setVisible] = useState(false);
+    const [blockType, setBlockType] = useState("");
 
     const showModal = () => {
         setVisible(true);
@@ -41,10 +43,17 @@ function ModalView() {
         setVisible(false);
     };
 
+    const onClickHandler = (blockTypeName) => {
+        // const blockType = +e.target.dataset.blockType;
+        console.log(blockTypeName);
+        setBlockType(blockTypeName);
+        // 클릭되면 블록(Card)이 생성되도록.
+    }
+
     return (
         <>
         <AntdModalWrapper>
-        <Antd_button type="dashed" onClick={showModal}>
+        <Antd_button type="dashed" size="large" onClick={showModal}>
             +블럭 추가
         </Antd_button>
         </AntdModalWrapper>
@@ -78,9 +87,10 @@ function ModalView() {
             </Tooltip> */}
             {/* icons can be found in here
                 https://ant.design/components/icon/*/}
-            <Antd_button icon={<LinkOutlined />} block onClick={modalOnClick}>링크</Antd_button>
-            <Antd_button icon={<FontSizeOutlined />} block>텍스트</Antd_button>
-            <Antd_button icon={<PictureOutlined />} block>사진</Antd_button>
+            <Antd_button icon={<LinkOutlined />} block onClick={() => onClickHandler("link")}>링크</Antd_button>
+            <Antd_button icon={<FontSizeOutlined />} block onClick={() => onClickHandler("text")}>텍스트</Antd_button>
+            <Antd_button icon={<PictureOutlined />} block onClick={() => onClickHandler("picture")}>사진</Antd_button>
+            {/* <h1>{blockType}</h1> */}
             </>
         </Modal>
         </>
