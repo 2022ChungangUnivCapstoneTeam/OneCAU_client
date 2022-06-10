@@ -7,7 +7,6 @@ import { Button as Antd_button} from "antd";
 import { SearchOutlined, LinkOutlined, FontSizeOutlined, PictureOutlined } from '@ant-design/icons';
 
 import styled from 'styled-components';
-import onClickHandler from './ModalOnClick';
 import { propTypes } from 'react-bootstrap/esm/Image';
 
 
@@ -51,13 +50,14 @@ const ModalView = (props) => {
 
     const onClickHandler = (blockTypeName) => {
         // const blockType = +e.target.dataset.blockType;
-        // setBlockType(blockTypeName);
-        // console.log(blockTypeName);
+        sendBlockType(blockTypeName);
+        // console.log("onClickHandler function..");
 
         // console.log("blockType: ", blockType);
         // 클릭되면 블록(Card)이 생성되도록.
         // 하위 컴포넌트에서 상위 컴포넌트로 값을 넘겨주기 위해서는 props를 사용할 수 없음 (props는 상위->하위)
-        sendBlockType(blockTypeName);
+        // sendBlockType(blockTypeName);
+        // onCreate();
     }
 
     return (
@@ -97,10 +97,10 @@ const ModalView = (props) => {
             </Tooltip> */}
             {/* icons can be found in here
                 https://ant.design/components/icon/*/}
-            {/* <Antd_button icon={<LinkOutlined />} block onClick={() => onClickHandler("link")}>링크</Antd_button> */}
-            <Antd_button icon={<LinkOutlined />} block onClick={() => sendBlockType("link")}>링크</Antd_button>
-            <Antd_button icon={<FontSizeOutlined />} block onClick={() => sendBlockType("text")}>텍스트</Antd_button>
-            <Antd_button icon={<PictureOutlined />} block onClick={() => sendBlockType("picture")}>사진</Antd_button>
+            {/* <Antd_button icon={<LinkOutlined />} block onClick={() => sendBlockType("link")}>링크</Antd_button> */}
+            <Antd_button icon={<LinkOutlined />} block onClick={() => onClickHandler("link")}>링크</Antd_button>
+            <Antd_button icon={<FontSizeOutlined />} block onClick={() => onClickHandler("text")}>텍스트</Antd_button>
+            <Antd_button icon={<PictureOutlined />} block onClick={() => onClickHandler("picture")}>사진</Antd_button>
             {/* <h1>{blockType}</h1> */}
             </>
         </Modal>

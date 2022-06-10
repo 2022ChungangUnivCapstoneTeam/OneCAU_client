@@ -1,6 +1,7 @@
 import update from 'immutability-helper'
 import { useCallback, useState, useRef } from 'react'
 import { Card } from './Card.js'
+import ModalView from '../LinkTree/ModalView';  // ModalView.js file
 
 const style = {
   width: 320,
@@ -26,13 +27,8 @@ export const Container = (props) => {
     },
   ])
 
-  const [newCardType, setNewCardType] = useState("")
-
-  const [inputs, setInputs] = useState({
-    id: '',
-    card_type: '',
-    card_header: '',
-  })
+  const [newCardType, setNewCardType] = useState(props.newCardType)
+  const [createNewCard, setCreateNewCard] = useState(props.createNewCard);
 
   const nextId = useRef(4);
   const onCreate = () => {
@@ -40,17 +36,59 @@ export const Container = (props) => {
       id: nextId.current,
       card_header: "",
       card_type: props.card_type,
+      // card_type: blockType,
     };
 
-    console.log("new card type: ", newCard.card_type);
+    console.log("new card type: ", newCard);
+    // console.log("new card type: ", props.card_type);
 
     setCards([...cards, newCard]);
-
-    // setInputs({
-
-    // });
-
     nextId.current += 1;
+
+    // return (
+    //   <div style={style}>
+    //   {/* <CreateCard/> */}
+    //    {cards.map((card, i) => renderCard(card, i))}
+    //   </div>
+    // )
+  }
+
+  // const [newCardType, setNewCardType] = useState("");
+
+  // stream: 하위(ModalView) -> 상위(card container)
+  const getNewCardType = async (cT) => {
+    setNewCardType(cT);// cT: cardType
+    if(newCardType) {
+      await setCreateNewCard(true);
+      console.log(cT);
+      console.log(createNewCard);
+
+      const headersType = {
+        link : '⠿ 링크',
+        text : '⠿ 텍스트',
+        picture : '⠿ 사진',
+      };
+      let header = '';
+      for (const [key, value] of Object.entries(headersType)){
+        if(key == cT){
+          header = value;
+        }
+      }
+
+      const newCard = {
+        id: nextId.current,
+        card_header: header,
+        // card_type: props.card_type,
+        card_type: cT,
+      };
+
+      console.log("new card type: ", newCard);
+
+      setCards([...cards, newCard]);
+      nextId.current += 1;
+
+      // await onCreate();
+    }
   }
 
 
@@ -71,6 +109,8 @@ export const Container = (props) => {
   )}, [])
 
   const renderCard = useCallback((card, index) => {
+    // onCreate(card.card_type);
+    // console.log("render cards", card)
     return (
       <Card
         key={card.id}
@@ -80,10 +120,17 @@ export const Container = (props) => {
         card_header={card.card_header}
         movable={card.movable}
         moveCard={moveCard}
-        onCreate={onCreate}
+        // onCreate={onCreate}
       />
     )
   }, [])
+
+
+  // 어디에다가 onCreate를 추가해야 할까?
+
+  // if(createNewCard){
+  //   onCreate();
+  // }
 
   return (
     <>
@@ -91,6 +138,7 @@ export const Container = (props) => {
          {/* <CreateCard/> */}
           {cards.map((card, i) => renderCard(card, i))}
       </div>
+      <ModalView getNewCardType={getNewCardType}/>
     </>
   )
 }

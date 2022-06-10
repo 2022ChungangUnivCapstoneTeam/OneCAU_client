@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Container__ } from './styles';
 import Button from '../Button';
 import variables from '../variables';
@@ -21,19 +21,11 @@ import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import styled from 'styled-components';
 // import modalOnClick from './Blocks/ModalOnClick';
-import ModalView from './Modal/ModalView';
+// import ModalView from './Modal/ModalView';
 import Profile from './Profile';
 import { Row, Col, Container } from 'react-bootstrap';
 
 // const facebookLogo = require('../../images/facebook.svg');
-// const githubLogo = require('../../images/github.svg');
-// const youtubeLogo = require('../../images/youtube.svg');
-// const instagramLogo = require('../../images/instagram.svg');
-// const linkedinLogo = require('../../images/linkedin-in.svg');
-// const reactLogo = require('../../images/react.svg');
-// const twitterLogo = require('../../images/twitter.svg');
-// const whatsappLogo = require('../../images/whatsapp.svg');
-// '../../../img/482380.jpg'
 
 const AntdModalWrapper = styled.div`
   // @import '~antd/dist/antd.css';
@@ -51,11 +43,20 @@ export default function LinkTree() {
   // const [image, setImage] = useState('');
   const [container, setContainer] = useState(null);
   const [newCardType, setNewCardType] = useState("");
+  const [createNewCard, setCreateNewCard] = useState(false);
 
-  const getNewCardType = (text) => {
-    setNewCardType(text);
-    // console.log(text);
-  }
+  // get from button in 'modalview'
+  // const getNewCardType = (text) => {
+  //   setNewCardType(text);
+  //   if(newCardType) {
+  //     setCreateNewCard(true);
+  //     // console.log(createNewCard);
+  //   }
+  // }
+
+  // const getOnCreate = (blockType) => {
+  //   onCreate(blockType);
+  // }
 
   // React Hook
   const App__ = () => {
@@ -91,11 +92,11 @@ export default function LinkTree() {
               <Profile/>
               <DndProvider backend={HTML5Backend}>
                 {/* this is Container */}
-                <Draggable_cards />
+                <Draggable_cards newCardType={newCardType} createFlag={createNewCard} />
               </DndProvider>
 
               {/* Block Modal */}
-              <ModalView getNewCardType={getNewCardType}/>
+              {/* <ModalView getNewCardType={getNewCardType}/> */}
             </Container__>
           </Col>
         </Row>
