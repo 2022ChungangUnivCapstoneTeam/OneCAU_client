@@ -18,7 +18,6 @@
 $ git clone https://github.com/2022ChungangUnivCapstoneTeam/OneCAU_client.git
 $ cd OneCAU_client
 ```
-* If you want fully-functioning project of SeolVim, you need to download [SeolVim Backend](https://github.com/SeolVim/SeolVim_Backend) and run the backend.
 
 ## Installation & Run ##
 1. npm install
