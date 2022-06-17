@@ -1,7 +1,5 @@
 # 2022-1 Capstone Project Front-end (React.js) #
 
-<p align="center"><img src="./resources/Logo_descr_eng.png"></p>
-
 ## About OneLink CAU project ##
 * Create Vim script (e.g. .vimrc) by block coding.
 * By enabling [google/blockly](https://github.com/google/blockly) to support the Vim language, we expect more people interested in using Vim, can easily configure vim to suit their own taste.
@@ -17,8 +15,8 @@
 
 ## How to download project ##
 ```bash
-$ git clone https://github.com/SeolVim/SeolVim_Frontend.git
-$ cd SeolVim_Frontend
+$ git clone https://github.com/2022ChungangUnivCapstoneTeam/OneCAU_client.git
+$ cd OneCAU_client
 ```
 * If you want fully-functioning project of SeolVim, you need to download [SeolVim Backend](https://github.com/SeolVim/SeolVim_Backend) and run the backend.
 
@@ -38,20 +36,7 @@ $ cd SeolVim_Frontend
  ```url
 http://localhost:5000/
  ```
-
-## Vim blocks usage ##
-* Simply drag-and-drop the blocks from tool box to workspace.
-* If you want to export your blocks to vim language, click the exporting button.
-
-## Project Structure ##
-![FrontArch](./resources/FrontEnd_Arch.jpg)
-
 [comment]: <> (프로젝트의 구조를 넣기)
-
-## Contributing to SeolVim ##
-* If you are intrested in improving SeolVim experience, we welcome contributions to Seolvim in the form of pull requests, bug reports, github issues and more!
-* You might also want to look for help or question, feel free to contact us!
-
 ## Translations of this README ##
 [Korean - currently not supported](./README.md)
 
